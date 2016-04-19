@@ -6,7 +6,7 @@
 Summary:	Helper class for cross-platform launching of applications
 Name:		ruby-%{pkgname}
 Version:	0.4.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 Source0:	http://gems.rubyforge.org/gems/%{pkgname}-%{version}.gem
@@ -17,8 +17,6 @@ BuildRequires:	rpmbuild(macros) >= 1.665
 %if %{with tests}
 BuildRequires:	rubygem(rspec)
 %endif
-Requires:	rubygem(configuration) >= 0.0.5
-Requires:	rubygem(rake) >= 0.8.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,9 +34,14 @@ programs.
 chmod a+rx bin/*
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
+
 %build
 # write .gemspec
 %__gem_helper spec
+
+# bogus dep
+# s.add_runtime_dependency(%q<rake>, [">= 0.8.1"])
+%{__sed} -i -e '/s.add_runtime_dependency.*rake/d' *.gemspec
 
 %if %{with tests}
 rspec spec
