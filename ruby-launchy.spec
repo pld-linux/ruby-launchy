@@ -2,7 +2,7 @@
 Summary:	Helper class for launching cross-platform applications
 Name:		ruby-%{pkgname}
 Version:	3.1.1
-Release:	1
+Release:	2
 License:	ISC
 Group:		Development/Languages
 Source0:	https://rubygems.org/downloads/%{pkgname}-%{version}.gem
